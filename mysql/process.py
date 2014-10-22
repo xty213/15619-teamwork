@@ -6,18 +6,6 @@ from datetime import datetime
 from StringIO import StringIO
 import traceback
 
-def decipher(string):
-    letters = 'abcdefghijklmnopqrstuvwxyz'
-    sb = []
-    for char in string:
-        if 'a' <= char <= 'z':
-            sb.append(letters[(ord(char) - ord('a') + 13) % 26])
-        else:
-            sb.append(char)
-    return "".join(sb)
-
-
-
 filename = sys.argv[1]
 host = sys.argv[2]
 username = sys.argv[3]
@@ -31,9 +19,9 @@ with open('AFINN.json') as f:
 
 # banned words
 banned = set()
-with open('banned.txt') as f:
-    for line in f:
-        banned.add(decipher(line.strip()))
+with open('banned.json') as f:
+    line = f.readline()
+    banned = set(ujson.loads(line))
 
 
 # connect to mysql
