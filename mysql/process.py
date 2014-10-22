@@ -29,10 +29,10 @@ db = MySQLdb.connect(host=host,
                      user = username,
                      passwd = password,
                      db = '15619project',
-                     charset='utf8',
-                     init_command='SET NAMES utf8mb4')
+                     charset='utf8')
 
 cur = db.cursor()
+cur.execute('SET NAMES utf8mb4')
 
 with open(filename) as f:
     for line in f:
