@@ -6,3 +6,4 @@ wget https://bootstrap.pypa.io/get-pip.py
 sudo python get-pip.py
 sudo pip install ujson
 sudo apt-get -q -y install python2.7-mysqldb
+exit 0
