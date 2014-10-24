@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+  <!-- Specify a JDBC datasource -->
+  <Resource name="jdbc/mysql1" auth="Container"
+            type="javax.sql.DataSource" username="ccteam" password="password"
+            driverClassName="com.mysql.jdbc.Driver"
+	    url="jdbc:mysql://ec2-54-172-127-100.compute-1.amazonaws.com:3306/15619project"
+            maxActive="1" maxIdle="1" />
+
+  <Resource name="jdbc/mysql2" auth="Container"
+            type="javax.sql.DataSource" username="ccteam" password="password"
+            driverClassName="com.mysql.jdbc.Driver"
+	    url="jdbc:mysql://ec2-54-173-36-252.compute-1.amazonaws.com:3306/15619project"
+            maxActive="1" maxIdle="1" />
+
+  <Resource name="jdbc/mysql3" auth="Container"
+            type="javax.sql.DataSource" username="ccteam" password="password"
+            driverClassName="com.mysql.jdbc.Driver"
+	    url="jdbc:mysql://ec2-54-172-126-11.compute-1.amazonaws.com/15619project"
+            maxActive="1" maxIdle="1" />
+  
+</Context>
