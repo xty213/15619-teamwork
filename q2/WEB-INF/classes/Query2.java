@@ -37,6 +37,10 @@ public class Query2 extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
 
+	response.setContentType("text/html; charset=UTF-8");
+	response.setCharacterEncoding("UTF-8");
+
+
 	try {
 
 	    StringBuilder str = new StringBuilder(1024);
@@ -110,11 +114,13 @@ public class Query2 extends HttpServlet {
 		while (resultSet.next()) {
 		    str.append(String.valueOf(resultSet.getLong(1)));
 		    str.append(':');
-
+		    
 		    str.append(String.valueOf(resultSet.getInt(2)));
 		    str.append(':');
 		
 		    str.append(resultSet.getString(3));
+		    //String text = new String(resultSet.getBytes(3), "UTF-8");
+		    //str.append(text);
 		}
 
 		resultSet.close();
