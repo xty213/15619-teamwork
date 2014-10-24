@@ -1,0 +1,33 @@
+To init a HBase server:
+    HBase shell
+    Create table: create 'tweets', 'attr'
+    # columns: ’attr:censored_text', ‘attr:score', ‘attr:tweet_id'
+    Start thrift: hbase-daemon.sh start thrift
+
+
+To init ETL:
+    Modify mapper.py, set HBase DNS, table name and table schema.
+    When creating EMR, set bootstrap script to install Hellobase.
+
+
+To init HBase Python front end server:
+    Use bootstrap.sh: modify it before using, uncomment the line
+
+    django-admin.py startproject server
+    cd server
+
+    python manage.py startapp q1
+    python manage.py startapp q2
+
+    vim server/settings.py
+        modify installed apps, add 'q1', 'q2'
+    vim server/urls.py
+        modify url dispatcher, add url(r'^q1$', 'q1.views.handle_request'), url(r'^q2$', 'q2.views.handle_request'),
+
+    vim q1/views.py
+    vim q2/views.py
+
+    python manage.py migrate
+    python manage.py runserver
+
+    set HBase address, table name and table schema

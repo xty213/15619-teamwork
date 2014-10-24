@@ -68,7 +68,7 @@ for line in sys.stdin:
     counter += 1
     batch.put("%s %s" % (user_id, fixed_time), {'attr:censored_text': censored_text.encode('utf-8'), 'attr:score':str(score), 'attr:tweet_id':tweet_id})
 
-    if counter > 500:
+    if counter > 200:
         batch.send()
         batch = tweets.batch()
         counter = 0
