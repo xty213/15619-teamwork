@@ -21,6 +21,9 @@ To init HBase Python front end server:
 
     vim server/settings.py
         modify installed apps, add 'q1', 'q2'
+        modify DEBUG = False
+        modify TIME_ZONE = 'US/Eastern'
+        modify ALLOWED_HOSTS = ['*']
     vim server/urls.py
         modify url dispatcher, add url(r'^q1$', 'q1.views.handle_request'), url(r'^q2$', 'q2.views.handle_request'),
 
@@ -28,6 +31,6 @@ To init HBase Python front end server:
     vim q2/views.py
 
     python manage.py migrate
-    python manage.py runserver
+    sudo nohup python manage.py runserver 0.0.0.0:80 &
 
     set HBase address, table name and table schema
