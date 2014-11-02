@@ -78,7 +78,7 @@ public class Process {
                 }
             }
             String censoredText = stringBuilder.toString();
-            censoredText = censoredText.replace("\t", "\\t").replace("\n", "\\n").replace("\r", "\\r");
+            censoredText = censoredText.replace("\\", "\\\\").replace("\t", "\\t").replace("\n", "\\n").replace("\r", "\\r");
             System.out.println(tweetId + "\t" + userId + "\t" + targetTime + "\t" + timestamp + "\t" + score + "\t" + censoredText);
         }
         bufferedReader.close();
