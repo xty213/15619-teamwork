@@ -1,0 +1,10 @@
+To init a HBase server:
+    hbase shell
+    Create table: create 'q3', {NAME => 'by', VERSIONS => 1}
+    Create table: create 'q4', {NAME => 'tag', VERSIONS => 1}
+    Start thrift: hbase-daemon.sh start thrift
+
+
+To init ETL:
+    Set the DNS name in mapper.py
+    When creating EMR, set bootstrap script to install hellobase and ujson
