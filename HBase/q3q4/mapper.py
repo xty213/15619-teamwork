@@ -13,6 +13,9 @@ sys.setdefaultencoding('utf8')
 q3_table = happybase.Connection("ec2-54-85-195-109.compute-1.amazonaws.com").table('q3')
 q4_table = happybase.Connection("ec2-54-85-195-109.compute-1.amazonaws.com").table('q4')
 
+q3_counter = 0
+q3_batch = q3_table.batch()
+
 for line in sys.stdin:
     if line != '\n':
         obj = ujson.loads(line)
@@ -22,17 +25,13 @@ for line in sys.stdin:
             original_user_id = obj['retweeted_status']['user']['id_str']
             retweet_user_id = obj['user']['id_str']
 
-            retweet_col = "by:" + retweet_user_id
-            original_col = "by:" + original_user_id
+            q3_counter += 1
+            q3_batch.put(original_user_id, {"by:" + retweet_user_id: '1'})
+            
+            if q3_counter > 200:
+                q3_batch.send()
+                q3_counter = 0
 
-            original_was_retweeted = len(q3_table.row(original_user_id, columns=(retweet_col,)))
-            if not original_was_retweeted:
-                rewteet_was_retweeted = len(q3_table.row(retweet_user_id, columns=(original_col,)))
-                if rewteet_was_retweeted:
-                    q3_table.put(original_user_id, {retweet_col: '1'})
-                    q3_table.put(retweet_user_id, {original_col: '1'})
-                else:
-                    q3_table.put(original_user_id, {retweet_col: '0'})
             
         # q4
         if obj['entities']['hashtags']:
@@ -44,7 +43,7 @@ for line in sys.stdin:
             else:
                 continue
 
-            date = datetime.strptime(obj['created_at'], '%a %b %d %H:%M:%S +0000 %Y').strftime('%Y%m%d')
+            date = datetime.strptime(obj['created_at'], '%a %b %d %H:%M:%S +0000 %Y').strftime('%Y-%m-%d')
             tweet_id = obj['id_str']
             row_key = date + location
             for hashtag in obj['entities']['hashtags']:
@@ -54,5 +53,7 @@ for line in sys.stdin:
                     q4_table.put(row_key, {tag_col: "%s:%s" % (tweet_id, hashtag['indices'][0])})
                 else:
                     q4_table.put(row_key, {tag_col: "%s,%s:%s" % (tag_dict[tag_col], tweet_id, hashtag['indices'][0])})
+
+q3_batch.send()
 
 print "OK"
