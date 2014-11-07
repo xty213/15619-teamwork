@@ -47,7 +47,7 @@ public class Q3 extends HttpServlet {
 
 			conn = q3Source.getConnection();
 			PreparedStatement ps = conn.prepareStatement(QUERY);
-			ps.setInt(1, Integer.parseInt(request.getParameter("userid")));
+			ps.setLong(1, Long.parseLong(request.getParameter("userid")));
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
