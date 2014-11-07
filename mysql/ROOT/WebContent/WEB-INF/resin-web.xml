@@ -3,7 +3,7 @@
 <database jndi-name='jdbc/q3'>
     <driver>
       <type>com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource</type>
-      <url>jdbc:mysql://ec2-54-84-233-75.compute-1.amazonaws.com:3306/15619project</url>
+      <url>jdbc:mysql://ec2-54-86-102-164.compute-1.amazonaws.com:3306/15619project</url>
       <user>ccteam</user>
       <password>password</password>
       <useUnicode/>
