@@ -8,3 +8,12 @@ To init a HBase server:
 To init ETL:
     Set the DNS name in mapper.py
     When creating EMR, set bootstrap script to install hellobase and ujson
+
+
+To sort the result for q4:
+    import happybase
+    from collections import OrderedDict
+    q4_table = happybase.Connection("ec2-54-173-99-121.compute-1.amazonaws.com").table('q4')
+    row = q4_table.row('2014-04-13Paradise')
+    splited_row = {k[4:]:{i[0]:i[1] for i in (s.split(':') for s in v.split(','))} for k,v in row.items()}
+    sorted_row = OrderedDict(sorted(splited_row.items(), key=lambda t:len(t[1]), reverse=True))

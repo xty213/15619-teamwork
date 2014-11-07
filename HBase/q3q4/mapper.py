@@ -10,8 +10,8 @@ from datetime import datetime
 reload(sys)
 sys.setdefaultencoding('utf8')
 
-q3_table = happybase.Connection("ec2-54-85-195-109.compute-1.amazonaws.com").table('q3')
-q4_table = happybase.Connection("ec2-54-85-195-109.compute-1.amazonaws.com").table('q4')
+q3_table = happybase.Connection("ec2-54-173-99-121.compute-1.amazonaws.com").table('q3')
+q4_table = happybase.Connection("ec2-54-173-99-121.compute-1.amazonaws.com").table('q4')
 
 q3_counter = 0
 q3_batch = q3_table.batch()
