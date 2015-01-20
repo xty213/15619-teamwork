@@ -1,4 +1,5 @@
 15619-project
 =============
 
-https://github.com/xty213/15619-teamwork.git
+### IMPORTANT
+I retain the copyright of my work if you are a student who is taking relevant courses.
